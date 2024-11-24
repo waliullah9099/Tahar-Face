@@ -1,9 +1,11 @@
-import Header from "../Components/Common/Header";
+import { useAuth } from "../hooks/useAuth";
 
 const HomePage = () => {
+  const { auth } = useAuth();
+  console.log(auth);
+
   return (
     <>
-      <Header />
       <h1>HomePage</h1>
     </>
   );
