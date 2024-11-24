@@ -1,15 +1,18 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import Field from "../Common/Field";
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const {
-    regsiter,
+    register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
   const formSubmit = (formData) => {
     console.log(formData);
+    navigate("/");
   };
 
   return (
@@ -17,24 +20,24 @@ export default function LoginForm() {
       onSubmit={handleSubmit(formSubmit)}
       className="border-b border-[#3F3F3F] pb-10 lg:pb-[60px]"
     >
-      <Field label="Email">
+      <Field label="Email" error={errors.email}>
         <input
           className={`auth-input ${
             errors.email ? "border-red-500" : "border-gray-200"
           }`}
-          {...regsiter("email", { required: "Email is required" })}
+          {...register("email", { required: "Email is required" })}
           type="email"
           name="email"
           id="email"
         />
       </Field>
 
-      <Field label="Password">
+      <Field label="Password" error={errors.password}>
         <input
           className={`auth-input ${
             errors.email ? "border-red-500" : "border-gray-200"
           }`}
-          {...regsiter("password", {
+          {...register("password", {
             required: "Password is required",
             minLength: {
               value: 8,
